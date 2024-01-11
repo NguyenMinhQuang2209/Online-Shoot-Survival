@@ -72,7 +72,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2505182893852439682}
   - component: {fileID: 2505182893852439680}
-  - component: {fileID: 2505182893852439681}
+  - component: {fileID: 7529923585611265848}
   - component: {fileID: 2505182893852439935}
   - component: {fileID: 7936682014343549236}
   - component: {fileID: 8851710368296896203}
@@ -124,8 +124,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &2505182893852439681
-BoxCollider2D:
+--- !u!70 &7529923585611265848
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -137,19 +137,9 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0056793094, y: -0.039755315}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.73875105, y: 1.0795105}
-  m_EdgeRadius: 0
+  m_Offset: {x: 0.0054603517, y: 0}
+  m_Size: {x: 0.5774912, y: 1}
+  m_Direction: 0
 --- !u!114 &2505182893852439935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1501991811
+  GlobalObjectIdHash: 4070944404
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -184,7 +174,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SyncPositionX: 1
   SyncPositionY: 1
-  SyncPositionZ: 1
+  SyncPositionZ: 0
   SyncRotAngleX: 0
   SyncRotAngleY: 0
   SyncRotAngleZ: 0
@@ -227,6 +217,7 @@ MonoBehaviour:
   moveSpeed: 2
   runSpeed: 3
   virtualCamera: {fileID: 2505182894370946488}
+  hand: {fileID: 1651116412}
 --- !u!114 &6053402726134609341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -247,6 +238,7 @@ MonoBehaviour:
   useManaRate: 1
   waitRecoverMana: 5
   recoverManaRate: 1
+  waitRecoverManaRate: 1
 --- !u!1 &2505182893900021476
 GameObject:
   m_ObjectHideFlags: 0

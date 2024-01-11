@@ -7,6 +7,8 @@ public class GameController : NetworkBehaviour
 
     public NetworkVariable<int> gameMode = new NetworkVariable<int>();
 
+    public string playerName = "";
+
     public enum GameMode
     {
         Lobby,

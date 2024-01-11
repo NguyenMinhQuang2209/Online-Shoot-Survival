@@ -10,6 +10,7 @@ public class PlayerMovement : NetworkBehaviour
     [SerializeField] private float moveSpeed = 2f;
     [SerializeField] private float runSpeed = 3f;
     [SerializeField] private CinemachineVirtualCamera virtualCamera;
+    [SerializeField] private Transform hand;
     float currentSpeed = 0f;
     private Animator animator;
     private Transform character;
@@ -18,6 +19,10 @@ public class PlayerMovement : NetworkBehaviour
 
     bool isDie = false;
 
+
+    // Shooting
+    float currentTimeBwtAttack = 0f;
+    private Weapon currentWeapon = null;
 
     public override void OnNetworkSpawn()
     {
@@ -96,8 +101,29 @@ public class PlayerMovement : NetworkBehaviour
             isDie = true;
             return;
         }
-    }
 
+        if (!IsOwner)
+        {
+            return;
+        }
+
+        HandRotate();
+        Shooting();
+    }
+    private void Shooting()
+    {
+        if (currentWeapon == null)
+        {
+            return;
+        }
+
+        currentTimeBwtAttack += Time.deltaTime;
+        if (currentTimeBwtAttack >= currentWeapon.GetTimeBwtAttack())
+        {
+            currentTimeBwtAttack = 0f;
+            currentWeapon.Shoot();
+        }
+    }
     private void FixedUpdate()
     {
         if (isDie)
@@ -144,8 +170,27 @@ public class PlayerMovement : NetworkBehaviour
             animator.SetBool("Run", running);
         }
     }
+    private void HandRotate()
+    {
+        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 targetPos = mousePos - (Vector2)transform.position;
+        float angle = Mathf.Atan2(targetPos.y, targetPos.x) * Mathf.Rad2Deg;
+        hand.transform.rotation = Quaternion.Euler(new(0f, 0f, angle));
+    }
     public void ObjectDie()
     {
         isDie = true;
+    }
+    public void Equipment(Weapon weapon)
+    {
+        foreach (Transform child in hand)
+        {
+            Destroy(child.gameObject);
+        }
+        if (weapon != null)
+        {
+            currentTimeBwtAttack = 0f;
+            currentWeapon = Instantiate(weapon, hand.transform);
+        }
     }
 }

@@ -344,7 +344,6 @@ public class LobbyController : MonoBehaviour
                 }
             }
             string amount = tempLobby.Players.Count + "/" + tempLobby.MaxPlayers;
-            Debug.Log(tempLobby.Name);
             tempItem.LobbyInit(tempLobby.Id, tempLobby.Name, playerName, amount);
         }
     }
@@ -367,6 +366,11 @@ public class LobbyController : MonoBehaviour
                 playerNameTxt.text = username;
                 GetLobbyList("");
                 lobbyListContainer.SetActive(true);
+
+                if (GameController.instance != null)
+                {
+                    GameController.instance.playerName = username;
+                }
             }
         }
         catch (Exception e)

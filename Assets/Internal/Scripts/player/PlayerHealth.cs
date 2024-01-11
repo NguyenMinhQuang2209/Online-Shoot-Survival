@@ -62,12 +62,6 @@ public class PlayerHealth : Health
         }
 
         RecoverManaTime();
-
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            TakeDamageTestServerRpc();
-        }
     }
     private void RecoverManaTime()
     {
