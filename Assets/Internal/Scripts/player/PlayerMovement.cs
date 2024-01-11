@@ -1,10 +1,7 @@
 using Cinemachine;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.XR;
 
 public class PlayerMovement : NetworkBehaviour
 {
@@ -17,9 +14,14 @@ public class PlayerMovement : NetworkBehaviour
     private Animator animator;
     private Transform character;
 
+    private PlayerHealth playerHealth;
+
+    bool isDie = false;
+
 
     public override void OnNetworkSpawn()
     {
+        playerHealth = GetComponent<PlayerHealth>();
         rb = GetComponent<Rigidbody2D>();
         foreach (Transform child in transform)
         {
@@ -65,9 +67,33 @@ public class PlayerMovement : NetworkBehaviour
             }
         }
     }
+    private void Update()
+    {
+        if (isDie)
+        {
+            GetComponent<Collider2D>().enabled = false;
+            if (IsOwner)
+            {
+                if (animator != null)
+                {
+                    animator.SetTrigger("Dead");
+                }
+            }
+        }
+        if (playerHealth.GetCurrentHealth() == 0)
+        {
+            isDie = true;
+            return;
+        }
+    }
 
     private void FixedUpdate()
     {
+        if (isDie)
+        {
+            return;
+        }
+
         if (!IsOwner)
         {
             return;
@@ -103,5 +129,9 @@ public class PlayerMovement : NetworkBehaviour
             animator.SetFloat("Speed", input.sqrMagnitude >= 0.1f ? 1f : 0f);
             animator.SetBool("Run", running);
         }
+    }
+    public void ObjectDie()
+    {
+        isDie = true;
     }
 }

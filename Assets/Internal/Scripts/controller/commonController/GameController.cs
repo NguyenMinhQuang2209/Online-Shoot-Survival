@@ -28,7 +28,7 @@ public class GameController : NetworkBehaviour
     {
         if (IsServer)
         {
-            gameMode.Value = (int)GameMode.Lobby;
+            gameMode.Value = (int)GameMode.SelectWeapon;
         }
     }
     private void Start()
