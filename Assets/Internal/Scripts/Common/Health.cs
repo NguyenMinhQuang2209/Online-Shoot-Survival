@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -39,5 +37,10 @@ public abstract class Health : NetworkBehaviour
     public int GetCurrentHealth()
     {
         return currentHealth.Value;
+    }
+
+    public void RecoverHealth(int v)
+    {
+        currentHealth.Value = Mathf.Min(currentHealth.Value + v, GetMaxHealth());
     }
 }

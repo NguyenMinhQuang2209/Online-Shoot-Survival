@@ -17,15 +17,30 @@ public abstract class Weapon : MonoBehaviour
     }
     public int GetDamage()
     {
-        return damage;
+        int plus = 0;
+        if (UpgradeController.instance != null)
+        {
+            plus = UpgradeController.instance.GetPlusDamage();
+        }
+        return damage + plus;
     }
     public float GetTimeBwtAttack()
     {
-        return timeBwtAttack;
+        float plus = 0;
+        if (UpgradeController.instance != null)
+        {
+            plus = UpgradeController.instance.GetReduceTimeBwtAttack();
+        }
+        return timeBwtAttack - plus;
     }
     public float GetDelayDieTime()
     {
-        return delayDieTime;
+        float plus = 0;
+        if (UpgradeController.instance != null)
+        {
+            plus = UpgradeController.instance.GetPlusDelayDieTime();
+        }
+        return delayDieTime + plus;
     }
     public int GetBulletAmount()
     {
@@ -37,6 +52,11 @@ public abstract class Weapon : MonoBehaviour
     }
     public float GetBulletSpeed()
     {
-        return bulletSpeed;
+        float plus = 0;
+        if (UpgradeController.instance != null)
+        {
+            plus = UpgradeController.instance.GetPlusBulletSpeed();
+        }
+        return bulletSpeed + plus;
     }
 }

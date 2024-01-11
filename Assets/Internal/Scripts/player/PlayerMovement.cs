@@ -14,6 +14,7 @@ public class PlayerMovement : NetworkBehaviour
     float currentSpeed = 0f;
     private Animator animator;
     private Transform character;
+    float plusSpeed = 0f;
 
     private PlayerHealth playerHealth;
 
@@ -149,7 +150,7 @@ public class PlayerMovement : NetworkBehaviour
             return;
         }
 
-        currentSpeed = moveSpeed;
+        currentSpeed = moveSpeed + plusSpeed;
         bool running = false;
         if (input.sqrMagnitude >= 0.1f)
         {
@@ -157,7 +158,7 @@ public class PlayerMovement : NetworkBehaviour
             {
                 if (playerHealth.UseMana())
                 {
-                    currentSpeed = runSpeed;
+                    currentSpeed = runSpeed + plusSpeed;
                     running = true;
                 }
             }
@@ -192,5 +193,9 @@ public class PlayerMovement : NetworkBehaviour
             currentTimeBwtAttack = 0f;
             currentWeapon = Instantiate(weapon, hand.transform);
         }
+    }
+    public void ChangePlusSpeed(float value)
+    {
+        plusSpeed = value;
     }
 }

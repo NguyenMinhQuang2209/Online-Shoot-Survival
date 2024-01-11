@@ -113,4 +113,9 @@ public class PlayerHealth : Health
             manaSlider.value = currentMana;
         }
     }
+
+    public void ChangePlusHealth(int v)
+    {
+        plusHealth.Value = Mathf.Max(v, 0);
+    }
 }

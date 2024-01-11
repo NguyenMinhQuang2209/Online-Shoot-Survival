@@ -41075,6 +41075,7 @@ MonoBehaviour:
     prefab: {fileID: 8946226751858713522, guid: b48a4cc3a99530f4488e78783e93586e, type: 3}
   - name: 2
     prefab: {fileID: 2489488721222810713, guid: 66009780f4c505e4187282ccd79976bb, type: 3}
+  prefabUpgradeList: []
 --- !u!4 &1469205354
 Transform:
   m_ObjectHideFlags: 0
