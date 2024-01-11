@@ -66,6 +66,17 @@ public class PlayerMovement : NetworkBehaviour
                 compound.m_BoundingShape2D = CameraCompoundController.instance.compoundCamera;
             }
         }
+
+        if (IsOwner)
+        {
+            if (HealthManaTxtController.instance != null)
+            {
+                playerHealth.HealthSliderConfig(HealthManaTxtController.instance.healthSlider,
+                    HealthManaTxtController.instance.manaSlider,
+                    HealthManaTxtController.instance.healthTxt,
+                    HealthManaTxtController.instance.manaTxt);
+            }
+        }
     }
     private void Update()
     {
@@ -118,8 +129,11 @@ public class PlayerMovement : NetworkBehaviour
         {
             if (Input.GetKey(KeyCode.LeftShift))
             {
-                currentSpeed = runSpeed;
-                running = true;
+                if (playerHealth.UseMana())
+                {
+                    currentSpeed = runSpeed;
+                    running = true;
+                }
             }
             character.rotation = Quaternion.Euler(0f, input.x < 0f ? 180f : 0f, 0f);
             rb.MovePosition(rb.position + currentSpeed * Time.fixedDeltaTime * input.normalized);
