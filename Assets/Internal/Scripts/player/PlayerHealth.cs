@@ -68,7 +68,7 @@ public class PlayerHealth : Health
         currentWaitRecoverMana += Time.deltaTime * waitRecoverManaRate;
         if (currentWaitRecoverMana >= waitRecoverMana)
         {
-            currentMana = Mathf.Max(0f, currentMana + Time.deltaTime * recoverManaRate);
+            currentMana = Mathf.Min(maxMana, currentMana + Time.deltaTime * recoverManaRate);
             canUseMana = true;
         }
     }

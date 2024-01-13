@@ -6,6 +6,7 @@ public class SpawnItemController : NetworkBehaviour
 {
     [SerializeField] private List<PreferenceObjectItem> prefabs = new();
     [SerializeField] private List<PreferenceUpgradeObjectItem> prefabUpgradeList = new();
+    [SerializeField] private ShowUI showUI;
 
     [ServerRpc(RequireOwnership = false)]
     public void SpawnItemServerRpc(string itemName, float[] spawnPosition, float[] spawnRotation)
@@ -81,6 +82,17 @@ public class SpawnItemController : NetworkBehaviour
                 bullet.BulletInit(damage, speed, delayDieTime, tempItem.transform.right * 2f, targetId);
             }
 
+        }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void SpawnShowUIServerRpc(float[] pos, string txt, Color color)
+    {
+        ShowUI tempShowUI = Instantiate(showUI, new(pos[0], pos[1], pos[2]), Quaternion.identity);
+        if (tempShowUI.TryGetComponent<NetworkObject>(out var networkObject))
+        {
+            networkObject.Spawn();
+            tempShowUI.ShowUIInit(txt, color);
         }
     }
 }

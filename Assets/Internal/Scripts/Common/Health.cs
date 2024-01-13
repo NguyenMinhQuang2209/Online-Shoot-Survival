@@ -17,6 +17,11 @@ public abstract class Health : NetworkBehaviour
     public virtual void TakeDamage(int damage)
     {
         currentHealth.Value = Mathf.Max(0, currentHealth.Value - damage);
+        if (PreferenceController.instance != null)
+        {
+            PreferenceController.instance.spawnItemController.SpawnShowUIServerRpc(new[] { transform.position.x, transform.position.y, transform.position.z },
+                damage.ToString(), Color.red);
+        }
         if (currentHealth.Value == 0)
         {
             ObjectDie();
