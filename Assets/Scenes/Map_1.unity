@@ -71170,10 +71170,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1310738965}
+  - component: {fileID: 1310738966}
   - component: {fileID: 1310738964}
   m_Layer: 0
   m_Name: SpawnItemController
-  m_TagString: Untagged
+  m_TagString: SpawnController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -71213,6 +71214,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1310738966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1310738962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 703496845
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &1401262669
 GameObject:
   m_ObjectHideFlags: 0
@@ -71933,6 +71954,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2081645994}
   - component: {fileID: 2081645995}
+  - component: {fileID: 2081645996}
   m_Layer: 0
   m_Name: LogController
   m_TagString: Untagged
@@ -71968,6 +71990,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   logTxt: {fileID: 0}
+--- !u!114 &2081645996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2081645993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea5647c7c0de32f4a97fe3fdf801fc83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2084967326
 GameObject:
   m_ObjectHideFlags: 0

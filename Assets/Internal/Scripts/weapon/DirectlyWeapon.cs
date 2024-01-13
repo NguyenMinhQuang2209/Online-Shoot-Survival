@@ -16,9 +16,10 @@ public class DirectlyWeapon : Weapon
         {
             float bulletAngle = GetBulletAngle();
             float angle = i == 0 ? 0 : (i % 2) != 0 ? i * bulletAngle : (i - 1) * -bulletAngle;
-            if (SpawnItemController.instance != null)
+            GameObject spawnItemController = GameObject.FindGameObjectWithTag(TagController.SPAWN_ITEM_CONTROLLER_TAG);
+            if (spawnItemController != null && spawnItemController.TryGetComponent<SpawnItemController>(out var spawnItem))
             {
-                SpawnItemController.instance.SpawnBulletServerRpc(
+                spawnItem.SpawnBulletServerRpc(
                     bullet.GetItemName(),
                     new[] { shootPosition.x, shootPosition.y, shootPosition.z },
                     new[] { 0f, 0f, rootParent.eulerAngles.z + angle },

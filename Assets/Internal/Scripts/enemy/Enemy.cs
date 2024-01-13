@@ -41,7 +41,7 @@ public class Enemy : NetworkBehaviour
                 ChasePlayer();
                 currentChangeTargetTimer = 0f;
             }
-            if (target != null)
+            if (target != null && agent != null)
             {
                 agent.SetDestination(target.position);
             }
@@ -86,6 +86,7 @@ public class Enemy : NetworkBehaviour
         {
             agent.isStopped = true;
             agent.enabled = false;
+            agent = null;
         }
     }
 }

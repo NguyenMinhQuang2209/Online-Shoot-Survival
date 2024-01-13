@@ -2,22 +2,10 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
-public class SpawnItemController : MonoBehaviour
+public class SpawnItemController : NetworkBehaviour
 {
-    public static SpawnItemController instance;
     [SerializeField] private List<PreferenceObjectItem> prefabs = new();
-
     [SerializeField] private List<PreferenceUpgradeObjectItem> prefabUpgradeList = new();
-    private void Awake()
-    {
-        if (instance != null && instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        instance = this;
-        DontDestroyOnLoad(gameObject);
-    }
 
     [ServerRpc(RequireOwnership = false)]
     public void SpawnItemServerRpc(string itemName, float[] spawnPosition, float[] spawnRotation)
