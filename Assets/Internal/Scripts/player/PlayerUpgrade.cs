@@ -20,6 +20,7 @@ public class PlayerUpgrade : NetworkBehaviour
     public override void OnNetworkSpawn()
     {
         playerHealth = GetComponent<PlayerHealth>();
+        playerMovement = GetComponent<PlayerMovement>();
     }
     private void Update()
     {

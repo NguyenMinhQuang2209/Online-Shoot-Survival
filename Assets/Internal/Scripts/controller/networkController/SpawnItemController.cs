@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
-public class SpawnItemController : NetworkBehaviour
+public class SpawnItemController : MonoBehaviour
 {
     public static SpawnItemController instance;
     [SerializeField] private List<PreferenceObjectItem> prefabs = new();

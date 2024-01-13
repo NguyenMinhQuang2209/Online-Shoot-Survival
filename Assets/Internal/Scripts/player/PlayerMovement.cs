@@ -1,16 +1,20 @@
 using Cinemachine;
 using System;
+using TMPro;
+using Unity.Collections;
 using Unity.Netcode;
 using UnityEngine;
 
 public class PlayerMovement : NetworkBehaviour
 {
     private Rigidbody2D rb;
+    [SerializeField] private NetworkVariable<FixedString128Bytes> username = new NetworkVariable<FixedString128Bytes>();
 
     [SerializeField] private float moveSpeed = 2f;
     [SerializeField] private float runSpeed = 3f;
     [SerializeField] private CinemachineVirtualCamera virtualCamera;
     [SerializeField] private Transform hand;
+    [SerializeField] private TextMeshProUGUI usernameTxt;
     float currentSpeed = 0f;
     private Animator animator;
     private Transform character;
@@ -55,12 +59,23 @@ public class PlayerMovement : NetworkBehaviour
             virtualCamera.enabled = true;
             virtualCamera.Priority = 1;
 
+            if (GameController.instance != null)
+            {
+                ChangeUsernameServerRpc(GameController.instance.playerName);
+            }
+            usernameTxt.gameObject.SetActive(false);
+
         }
         else
         {
             virtualCamera.enabled = false;
             virtualCamera.Priority = 0;
         }
+    }
+    [ServerRpc(RequireOwnership = false)]
+    public void ChangeUsernameServerRpc(string name)
+    {
+        username.Value = name;
     }
 
     private void HandleChangeSceneEvent(object sender, EventArgs e)
@@ -86,6 +101,10 @@ public class PlayerMovement : NetworkBehaviour
     }
     private void Update()
     {
+        if (!IsOwner)
+        {
+            usernameTxt.text = username.Value.ToString();
+        }
         if (isDie)
         {
             GetComponent<Collider2D>().enabled = false;

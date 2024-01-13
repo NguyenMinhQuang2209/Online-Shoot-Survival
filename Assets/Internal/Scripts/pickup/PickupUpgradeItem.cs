@@ -12,8 +12,13 @@ public class PickupUpgradeItem : NetworkBehaviour
             if (collision.gameObject.TryGetComponent<PlayerUpgrade>(out var playerUpgrade))
             {
                 playerUpgrade.PlusItem(upgradeItem);
-                Destroy(gameObject);
+                DestroyObjectServerRpc();
             }
         }
+    }
+    [ServerRpc(RequireOwnership = false)]
+    public void DestroyObjectServerRpc()
+    {
+        Destroy(gameObject);
     }
 }

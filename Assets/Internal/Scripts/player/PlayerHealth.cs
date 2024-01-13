@@ -117,5 +117,9 @@ public class PlayerHealth : Health
     public void ChangePlusHealth(int v)
     {
         plusHealth.Value = Mathf.Max(v, 0);
+        if (healthSlider != null)
+        {
+            healthSlider.maxValue = GetMaxHealth();
+        }
     }
 }
