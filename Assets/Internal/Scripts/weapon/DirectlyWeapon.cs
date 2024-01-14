@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class DirectlyWeapon : Weapon
 {
-    public override void Shoot()
+    public override void Shoot(ulong owner)
     {
         Transform rootParent = transform.parent;
         if (rootParent == null)
@@ -25,7 +25,8 @@ public class DirectlyWeapon : Weapon
                     GetDamage(),
                     GetBulletSpeed(),
                     GetDelayDieTime(),
-                    0);
+                    0,
+                    owner);
             }
         }
     }

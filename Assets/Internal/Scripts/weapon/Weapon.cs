@@ -11,7 +11,7 @@ public abstract class Weapon : MonoBehaviour
     [SerializeField] private float bulletAngle = 8f;
     [SerializeField] protected Bullet bullet;
     [SerializeField] protected Transform shootPos;
-    public virtual void Shoot()
+    public virtual void Shoot(ulong owner)
     {
 
     }

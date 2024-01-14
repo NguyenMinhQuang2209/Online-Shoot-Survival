@@ -116,6 +116,7 @@ public class PlayerMovement : NetworkBehaviour
                     animator.SetTrigger("Dead");
                 }
             }
+            return;
         }
         if (playerHealth.GetCurrentHealth() == 0)
         {
@@ -131,6 +132,10 @@ public class PlayerMovement : NetworkBehaviour
         HandRotate();
         Shooting();
     }
+    public string GetUserName()
+    {
+        return username.Value.ToString();
+    }
     private void Shooting()
     {
         if (currentWeapon == null)
@@ -142,7 +147,7 @@ public class PlayerMovement : NetworkBehaviour
         if (currentTimeBwtAttack >= currentWeapon.GetTimeBwtAttack())
         {
             currentTimeBwtAttack = 0f;
-            currentWeapon.Shoot();
+            currentWeapon.Shoot(NetworkObjectId);
         }
     }
     private void FixedUpdate()
@@ -230,6 +235,13 @@ public class PlayerMovement : NetworkBehaviour
 
     public void MovementToPosition(Vector2 newPos)
     {
-        rb.MovePosition(newPos);
+        if (IsOwner)
+        {
+            rb.MovePosition(newPos);
+        }
+    }
+    public bool PlayerDie()
+    {
+        return isDie;
     }
 }

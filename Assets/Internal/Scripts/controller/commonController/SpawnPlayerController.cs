@@ -17,10 +17,7 @@ public class SpawnPlayerController : NetworkBehaviour
     private void Start()
     {
         startGameTxt.SetActive(true);
-        if (IsServer)
-        {
-            Invoke(nameof(SpawnPlayer), waitSpawnTime);
-        }
+        Invoke(nameof(SpawnPlayer), waitSpawnTime);
     }
     private void Update()
     {
@@ -41,12 +38,18 @@ public class SpawnPlayerController : NetworkBehaviour
         {
             if (player.TryGetComponent<PlayerMovement>(out var playerMovement))
             {
-                float ranX = Random.Range(Mathf.Min(spawnXAxis.x, spawnXAxis.y), Mathf.Max(spawnXAxis.x, spawnXAxis.y));
-                float ranY = Random.Range(Mathf.Min(spawnYAxis.x, spawnYAxis.y), Mathf.Max(spawnYAxis.x, spawnYAxis.y));
-                playerMovement.MovementToPosition(new(ranX, ranY));
+                if (playerMovement.IsOwner)
+                {
+                    float ranX = Random.Range(Mathf.Min(spawnXAxis.x, spawnXAxis.y), Mathf.Max(spawnXAxis.x, spawnXAxis.y));
+                    float ranY = Random.Range(Mathf.Min(spawnYAxis.x, spawnYAxis.y), Mathf.Max(spawnYAxis.x, spawnYAxis.y));
+                    playerMovement.MovementToPosition(new(ranX, ranY));
+                }
             }
         }
-        startGame.Value = 1;
+        if (IsServer)
+        {
+            startGame.Value = 1;
+        }
     }
     public bool StartGame()
     {

@@ -41,10 +41,17 @@ public class Enemy : NetworkBehaviour
                 ChasePlayer();
                 currentChangeTargetTimer = 0f;
             }
-            if (target != null && agent != null)
+            if (target != null && agent != null && target.TryGetComponent<PlayerMovement>(out var playerMovement))
             {
-                transform.rotation = Quaternion.Euler(new(0f, target.position.x > transform.position.x ? 0f : 180f, 0f));
-                agent.SetDestination(target.position);
+                if (playerMovement.PlayerDie())
+                {
+                    target = null;
+                }
+                else
+                {
+                    transform.rotation = Quaternion.Euler(new(0f, target.position.x > transform.position.x ? 0f : 180f, 0f));
+                    agent.SetDestination(target.position);
+                }
             }
         }
     }

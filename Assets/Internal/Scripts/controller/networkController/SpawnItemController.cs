@@ -61,7 +61,8 @@ public class SpawnItemController : NetworkBehaviour
         int damage,
         float speed,
         float delayDieTime,
-        ulong targetId = 0)
+        ulong targetId,
+        ulong owner)
     {
         GameObject prefab = null;
         foreach (var item in prefabs)
@@ -79,7 +80,7 @@ public class SpawnItemController : NetworkBehaviour
             if (tempItem.TryGetComponent<NetworkObject>(out var networkObject) && tempItem.TryGetComponent<Bullet>(out var bullet))
             {
                 networkObject.Spawn();
-                bullet.BulletInit(damage, speed, delayDieTime, tempItem.transform.right * 2f, targetId);
+                bullet.BulletInit(damage, speed, delayDieTime, tempItem.transform.right * 2f, targetId, owner);
             }
 
         }

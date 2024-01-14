@@ -1,4 +1,5 @@
 using TMPro;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -37,6 +38,30 @@ public class PlayerHealth : Health
             playerMovement.ObjectDie();
         }
     }
+    public override void ObjectDie(ulong owner)
+    {
+        ObjectDie();
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        GameObject tempPlayer = null;
+        foreach (GameObject player in players)
+        {
+            if (player != null && player.TryGetComponent<NetworkObject>(out var networkObjectId))
+            {
+                if (networkObjectId.NetworkObjectId == owner)
+                {
+                    tempPlayer = player;
+                    break;
+                }
+            }
+        }
+        if (tempPlayer != null && tempPlayer.TryGetComponent<PlayerMovement>(out var targetMovement))
+        {
+            string shooterName = targetMovement.GetUserName();
+            string userName = playerMovement.GetUserName();
+            Debug.Log(userName + "Die by" + shooterName);
+        }
+    }
+
     private void Update()
     {
 

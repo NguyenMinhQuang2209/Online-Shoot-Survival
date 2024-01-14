@@ -27,11 +27,27 @@ public abstract class Health : NetworkBehaviour
             ObjectDie();
         }
     }
+    public virtual void TakeDamage(int damage, ulong owner)
+    {
+        currentHealth.Value = Mathf.Max(0, currentHealth.Value - damage);
+        if (PreferenceController.instance != null)
+        {
+            PreferenceController.instance.spawnItemController.SpawnShowUIServerRpc(new[] { transform.position.x, transform.position.y, transform.position.z },
+                damage.ToString(), Color.red);
+        }
+        if (currentHealth.Value == 0)
+        {
+            ObjectDie(owner);
+        }
+    }
     public virtual void ObjectDie()
     {
 
     }
+    public virtual void ObjectDie(ulong owner)
+    {
 
+    }
 
     [ServerRpc(RequireOwnership = false)]
     public void TakeDamageTestServerRpc()

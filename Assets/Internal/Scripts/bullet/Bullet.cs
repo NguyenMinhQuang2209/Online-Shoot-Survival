@@ -10,6 +10,7 @@ public class Bullet : NetworkBehaviour
     bool isInit = false;
     [SerializeField] private ItemName itemName;
     bool useCustomBullet = false;
+    ulong owner = 0;
     public override void OnNetworkSpawn()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -32,10 +33,11 @@ public class Bullet : NetworkBehaviour
             }
         }
     }
-    public void BulletInit(int damage, float speed, float delayDieTime, Vector3 shootDir, ulong targetId = 0)
+    public void BulletInit(int damage, float speed, float delayDieTime, Vector3 shootDir, ulong targetId, ulong owner)
     {
         this.damage = damage;
         this.speed = speed;
+        this.owner = owner;
 
         useCustomBullet = targetId != 0;
 
@@ -76,7 +78,7 @@ public class Bullet : NetworkBehaviour
                 {
                     if (collision.gameObject.TryGetComponent<Health>(out var health))
                     {
-                        health.TakeDamage(damage);
+                        health.TakeDamage(damage, owner);
                         Destroy(gameObject);
                     }
                 }
@@ -85,7 +87,7 @@ public class Bullet : NetworkBehaviour
             {
                 if (collision.gameObject.TryGetComponent<Health>(out var health))
                 {
-                    health.TakeDamage(damage);
+                    health.TakeDamage(damage, owner);
                     Destroy(gameObject);
                 }
             }
