@@ -14,15 +14,4 @@ public class PreferenceController : MonoBehaviour
         }
         instance = this;
     }
-    /*private void Update()
-    {
-        if (spawnItemController == null)
-        {
-            GameObject spawnItemObject = GameObject.FindGameObjectWithTag(TagController.SPAWN_ITEM_CONTROLLER_TAG);
-            if (spawnItemObject != null && spawnItemObject.TryGetComponent<SpawnItemController>(out spawnItemController))
-            {
-
-            }
-        }
-    }*/
 }

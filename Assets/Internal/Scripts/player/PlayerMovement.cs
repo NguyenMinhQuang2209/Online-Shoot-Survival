@@ -217,4 +217,9 @@ public class PlayerMovement : NetworkBehaviour
     {
         plusSpeed = value;
     }
+
+    public void MovementToPosition(Vector2 newPos)
+    {
+        rb.MovePosition(newPos);
+    }
 }

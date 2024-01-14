@@ -1,4 +1,3 @@
-using Unity.Collections;
 using Unity.Netcode;
 
 public class GameController : NetworkBehaviour

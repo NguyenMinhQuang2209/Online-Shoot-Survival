@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class SpawnEnemyController : NetworkBehaviour
 {
+    [SerializeField] private Vector2 spawnXAxis;
+    [SerializeField] private Vector2 spawnYAxis;
     [SerializeField] private List<EnemyItem> enemies = new();
 
     [SerializeField] private List<SpawnEnemyConfigItem> spawns = new();
-    [SerializeField] private Vector2 spawnXAxis;
-    [SerializeField] private Vector2 spawnYAxis;
 
     private readonly List<EnemySpawnItem> tempSpawn = new();
     private readonly List<SpawnEnemyConfigItem> waitSpawnEnemy = new();
@@ -42,7 +42,7 @@ public class SpawnEnemyController : NetworkBehaviour
                 for (int i = 0; i < spawns.Count; i++)
                 {
                     SpawnEnemyConfigItem temp = spawns[i];
-                    if (temp.startSpawnDate >= currentDay && (temp.endSpawnDate <= currentDay || temp.endSpawnDate <= 0))
+                    if (temp.startSpawnDate <= currentDay && (temp.endSpawnDate >= currentDay || temp.endSpawnDate <= 0))
                     {
                         if (temp.spawnAtHour >= currentHour || temp.spawnAtHour <= 0f)
                         {
@@ -62,13 +62,12 @@ public class SpawnEnemyController : NetworkBehaviour
                 {
                     for (int i = 0; i < waitSpawnEnemy.Count; i++)
                     {
-                        SpawnEnemyConfigItem temp = spawns[i];
-                        if (temp.startSpawnDate >= currentDay && temp.endSpawnDate <= currentDay)
+                        SpawnEnemyConfigItem temp = waitSpawnEnemy[i];
+                        if (temp.startSpawnDate <= currentDay && (temp.endSpawnDate >= currentDay || temp.endSpawnDate <= 0))
                         {
-                            if (temp.spawnAtHour >= currentHour)
+                            if (temp.spawnAtHour >= currentHour || temp.spawnAtHour <= 0f)
                             {
-                                int newIndex = (int)Mathf.Ceil(currentTimeBwtSpawn / temp.timeBwtSpawn);
-                                tempSpawn.Add(new(GetEnemy(temp.enemyName), temp.timeBwtSpawn, newIndex));
+                                tempSpawn.Add(new(GetEnemy(temp.enemyName), temp.timeBwtSpawn));
                                 waitSpawnEnemy.RemoveAt(i);
                                 i--;
                             }

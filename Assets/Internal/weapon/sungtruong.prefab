@@ -129,9 +129,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e85c950da1fae446a66feb8621c75aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
+  damage: 12
   bulletSpeed: 200
-  timeBwtAttack: 1
+  timeBwtAttack: 2.9
   delayDieTime: 2
   bulletAmount: 1
   bulletAngle: 8
