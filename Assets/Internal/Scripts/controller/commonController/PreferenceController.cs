@@ -3,7 +3,8 @@ using UnityEngine;
 public class PreferenceController : MonoBehaviour
 {
     public static PreferenceController instance;
-    [HideInInspector] public SpawnItemController spawnItemController;
+    public SpawnItemController spawnItemController;
+    public DayNightController dayNightController;
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -13,7 +14,7 @@ public class PreferenceController : MonoBehaviour
         }
         instance = this;
     }
-    private void Update()
+    /*private void Update()
     {
         if (spawnItemController == null)
         {
@@ -23,5 +24,5 @@ public class PreferenceController : MonoBehaviour
 
             }
         }
-    }
+    }*/
 }

@@ -43,6 +43,7 @@ public class Enemy : NetworkBehaviour
             }
             if (target != null && agent != null)
             {
+                transform.rotation = Quaternion.Euler(new(0f, target.position.x > transform.position.x ? 0f : 180f, 0f));
                 agent.SetDestination(target.position);
             }
         }
