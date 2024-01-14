@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.AI;
@@ -58,13 +59,24 @@ public class Enemy : NetworkBehaviour
     private void ChasePlayer()
     {
         GameObject[] players = GameObject.FindGameObjectsWithTag(PLAYER_TAG);
-        if (players.Length > 0)
+        List<GameObject> tempPlayer = new();
+        for (int i = 0; i < players.Length; i++)
         {
-            target = players[0].transform;
-            float distance = Vector2.Distance(transform.position, target.position);
-            for (int i = 1; i < players.Length; i++)
+            if (players[i].TryGetComponent<PlayerMovement>(out var playerMovement))
             {
-                Transform player = players[i].transform;
+                if (!playerMovement.PlayerDie())
+                {
+                    tempPlayer.Add(players[i]);
+                }
+            }
+        }
+        if (tempPlayer.Count > 0)
+        {
+            target = tempPlayer[0].transform;
+            float distance = Vector2.Distance(transform.position, target.position);
+            for (int i = 1; i < tempPlayer.Count; i++)
+            {
+                Transform player = tempPlayer[i].transform;
                 float nextDistance = Vector2.Distance(transform.position, player.position);
                 if (distance > nextDistance)
                 {
@@ -81,7 +93,7 @@ public class Enemy : NetworkBehaviour
             if (currentTakeDamageWaitTime >= takeDamageWaitTime)
             {
                 currentTakeDamageWaitTime = 0f;
-                if (collision.gameObject.TryGetComponent<Health>(out var health))
+                if (collision.gameObject.TryGetComponent<PlayerHealth>(out var health))
                 {
                     health.TakeDamage(damage);
                 }

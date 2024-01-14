@@ -24,6 +24,7 @@ public class PlayerMovement : NetworkBehaviour
 
     bool isDie = false;
 
+    bool triggerDead = false;
 
     // Shooting
     float currentTimeBwtAttack = 0f;
@@ -111,6 +112,18 @@ public class PlayerMovement : NetworkBehaviour
             GetComponent<Collider2D>().enabled = false;
             if (IsOwner)
             {
+                if (!triggerDead)
+                {
+                    if (PreferenceController.instance != null)
+                    {
+                        PlayerDeadController playerDeadController = PreferenceController.instance.playerDeadController;
+                        if (playerDeadController != null)
+                        {
+                            playerDeadController.PlayerDead();
+                        }
+                    }
+                    triggerDead = true;
+                }
                 if (animator != null)
                 {
                     animator.SetTrigger("Dead");
@@ -243,5 +256,10 @@ public class PlayerMovement : NetworkBehaviour
     public bool PlayerDie()
     {
         return isDie;
+    }
+
+    public CinemachineVirtualCamera GetMainCamera()
+    {
+        return virtualCamera;
     }
 }

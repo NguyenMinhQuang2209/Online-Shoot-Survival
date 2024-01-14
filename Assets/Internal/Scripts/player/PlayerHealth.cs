@@ -1,4 +1,4 @@
-using TMPro;
+﻿using TMPro;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
@@ -36,11 +36,24 @@ public class PlayerHealth : Health
         if (playerMovement != null)
         {
             playerMovement.ObjectDie();
+            string shooterName = "Quái vật";
+            string userName = playerMovement.GetUserName();
+            if (PreferenceController.instance != null)
+            {
+                ShowDeadTxt deadTxt = PreferenceController.instance.showDeadTxtController;
+                if (deadTxt != null)
+                {
+                    deadTxt.ShowDeadTxtServerRpc(shooterName + " đã giết " + userName);
+                }
+            }
         }
     }
     public override void ObjectDie(ulong owner)
     {
-        ObjectDie();
+        if (playerMovement != null)
+        {
+            playerMovement.ObjectDie();
+        }
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         GameObject tempPlayer = null;
         foreach (GameObject player in players)
@@ -54,11 +67,19 @@ public class PlayerHealth : Health
                 }
             }
         }
+        string shooterName = "Quái vật";
+        string userName = playerMovement.GetUserName();
         if (tempPlayer != null && tempPlayer.TryGetComponent<PlayerMovement>(out var targetMovement))
         {
-            string shooterName = targetMovement.GetUserName();
-            string userName = playerMovement.GetUserName();
-            Debug.Log(userName + "Die by" + shooterName);
+            shooterName = targetMovement.GetUserName();
+        }
+        if (PreferenceController.instance != null)
+        {
+            ShowDeadTxt deadTxt = PreferenceController.instance.showDeadTxtController;
+            if (deadTxt != null)
+            {
+                deadTxt.ShowDeadTxtServerRpc(shooterName + " đã giết " + userName);
+            }
         }
     }
 
@@ -72,6 +93,7 @@ public class PlayerHealth : Health
         if (healthSlider != null)
         {
             healthSlider.value = GetCurrentHealth();
+            healthSlider.maxValue = GetMaxHealth();
             if (healthTxt != null)
             {
                 healthTxt.text = GetCurrentHealth() + "/" + GetMaxHealth();
