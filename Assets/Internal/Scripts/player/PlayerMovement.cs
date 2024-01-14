@@ -58,10 +58,11 @@ public class PlayerMovement : NetworkBehaviour
         {
             virtualCamera.enabled = true;
             virtualCamera.Priority = 1;
+            GameObject gameController = GameObject.FindGameObjectWithTag("GameController");
 
-            if (GameController.instance != null)
+            if (gameController != null && gameController.TryGetComponent<GameController>(out var gameC))
             {
-                ChangeUsernameServerRpc(GameController.instance.playerName);
+                ChangeUsernameServerRpc(gameC.playerName);
             }
             usernameTxt.gameObject.SetActive(false);
 
@@ -163,11 +164,20 @@ public class PlayerMovement : NetworkBehaviour
     }
     private void Movement(Vector2 input)
     {
-
-        if (GameController.instance != null && !GameController.instance.CanMove())
+        if (PreferenceController.instance != null)
         {
-            return;
+            SpawnPlayerController spawnPlayer = PreferenceController.instance.spawnPlayerController;
+            if (spawnPlayer != null)
+            {
+                if (!spawnPlayer.StartGame())
+                {
+                    animator.SetFloat("Speed", 0f);
+                    animator.SetBool("Run", false);
+                    return;
+                }
+            }
         }
+
 
         currentSpeed = moveSpeed + plusSpeed;
         bool running = false;

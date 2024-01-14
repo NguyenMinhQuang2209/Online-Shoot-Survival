@@ -367,9 +367,10 @@ public class LobbyController : MonoBehaviour
                 GetLobbyList("");
                 lobbyListContainer.SetActive(true);
 
-                if (GameController.instance != null)
+                GameObject gameController = GameObject.FindGameObjectWithTag("GameController");
+                if (gameController != null && gameController.TryGetComponent<GameController>(out var gameC))
                 {
-                    GameController.instance.playerName = username;
+                    gameC.playerName = username;
                 }
             }
         }
