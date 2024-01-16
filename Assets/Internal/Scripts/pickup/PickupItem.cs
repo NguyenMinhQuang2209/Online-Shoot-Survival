@@ -1,24 +1,41 @@
 using Unity.Netcode;
 using UnityEngine;
 
-public class PickupItem : MonoBehaviour
+public class PickupItem : NetworkBehaviour
 {
     [SerializeField] private Weapon weapon;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (weapon != null)
+        if (weapon != null && IsServer)
         {
             if (collision.gameObject.TryGetComponent<PlayerMovement>(out var playerMovement))
             {
                 playerMovement.Equipment(weapon);
-                DestroyObjectServerRpc();
+                if (playerMovement.TryGetComponent<NetworkObject>(out var networkObject))
+                {
+                    EquipmentClientRpc(networkObject.NetworkObjectId);
+                }
+                Destroy(gameObject);
             }
         }
     }
-
-    [ServerRpc(RequireOwnership = false)]
-    public void DestroyObjectServerRpc()
+    [ClientRpc]
+    public void EquipmentClientRpc(ulong playerId)
     {
-        Destroy(gameObject);
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        foreach (var player in players)
+        {
+            if (player.TryGetComponent<NetworkObject>(out var networkObject))
+            {
+                if (networkObject.NetworkObjectId == playerId)
+                {
+                    if (player.TryGetComponent<PlayerMovement>(out var playerMovement))
+                    {
+                        playerMovement.Equipment(weapon);
+                    }
+                    return;
+                }
+            }
+        }
     }
 }

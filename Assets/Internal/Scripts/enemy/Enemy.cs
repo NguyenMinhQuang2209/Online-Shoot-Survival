@@ -92,10 +92,10 @@ public class Enemy : NetworkBehaviour
         {
             if (currentTakeDamageWaitTime >= takeDamageWaitTime)
             {
-                currentTakeDamageWaitTime = 0f;
                 if (collision.gameObject.TryGetComponent<PlayerHealth>(out var health))
                 {
                     health.TakeDamage(damage);
+                    currentTakeDamageWaitTime = 0f;
                 }
             }
         }
@@ -106,10 +106,10 @@ public class Enemy : NetworkBehaviour
         {
             if (currentTakeDamageWaitTime >= takeDamageWaitTime)
             {
-                currentTakeDamageWaitTime = 0f;
                 if (collision.gameObject.TryGetComponent<PlayerHealth>(out var health))
                 {
                     health.TakeDamage(damage);
+                    currentTakeDamageWaitTime = 0f;
                 }
             }
         }

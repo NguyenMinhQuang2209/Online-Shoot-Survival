@@ -1151,7 +1151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   countDown:
-    m_InternalValue: 5
+    m_InternalValue: 6
   countDownTxt: {fileID: 930952744}
 --- !u!4 &1010119205
 Transform:

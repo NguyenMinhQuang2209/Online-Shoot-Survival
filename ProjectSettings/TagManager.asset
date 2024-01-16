@@ -6,6 +6,7 @@ TagManager:
   tags:
   - SpawnController
   - Enemy
+  - NetworkObject
   layers:
   - Default
   - TransparentFX

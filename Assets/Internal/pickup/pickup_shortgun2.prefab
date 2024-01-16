@@ -12,11 +12,11 @@ GameObject:
   - component: {fileID: 1850408765665377647}
   - component: {fileID: 1850408765665377644}
   - component: {fileID: 1850408765665377645}
-  - component: {fileID: 1850408765665377642}
+  - component: {fileID: -4519053731282412994}
   - component: {fileID: 2798098712132845445}
   m_Layer: 0
   m_Name: pickup_shortgun2
-  m_TagString: Untagged
+  m_TagString: NetworkObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -135,7 +135,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.5}
   m_EdgeRadius: 0
---- !u!114 &1850408765665377642
+--- !u!114 &-4519053731282412994
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -147,7 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2608872668
+  GlobalObjectIdHash: 3406076570
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0

@@ -6,16 +6,36 @@ public class PickupLightItem : NetworkBehaviour
     public LightCustom lightCustom;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent<PlayerLight>(out var playerLight))
+        if (IsServer)
         {
-            playerLight.EquipmentLight(lightCustom);
-            DestroyObjectServerRpc();
+            if (collision.TryGetComponent<PlayerLight>(out var playerLight))
+            {
+                playerLight.EquipmentLight(lightCustom);
+                if (playerLight.TryGetComponent<NetworkObject>(out var networkObject))
+                {
+                    EquipmentClientRpc(networkObject.NetworkObjectId);
+                }
+                Destroy(gameObject);
+            }
         }
     }
-
-    [ServerRpc(RequireOwnership = false)]
-    public void DestroyObjectServerRpc()
+    [ClientRpc]
+    public void EquipmentClientRpc(ulong playerId)
     {
-        Destroy(gameObject);
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        foreach (var player in players)
+        {
+            if (player.TryGetComponent<NetworkObject>(out var networkObject))
+            {
+                if (networkObject.NetworkObjectId == playerId)
+                {
+                    if (player.TryGetComponent<PlayerLight>(out var playerLight))
+                    {
+                        playerLight.EquipmentLight(lightCustom);
+                    }
+                    return;
+                }
+            }
+        }
     }
 }

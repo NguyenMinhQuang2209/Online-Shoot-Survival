@@ -48,7 +48,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 121
+  controlID: 104
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -225,7 +225,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 65
+  controlID: 19
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -270,8 +270,8 @@ MonoBehaviour:
     y: 0
     width: 871.2
     height: 452.8
-  m_MinSize: {x: 202, y: 221}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 18}
   m_Panes:
   - {fileID: 18}
@@ -404,7 +404,7 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 50596
+  m_LastSelectedObjectID: 33562
 --- !u!114 &15
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -445,23 +445,23 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Internal/enemy
+    - Assets/Internal/Scripts/pickup
     m_Globs: []
     m_OriginalText: 
     m_FilterByTypeIntersection: 0
   m_ViewMode: 1
   m_StartGridSize: 45
   m_LastFolders:
-  - Assets/Internal/enemy
+  - Assets/Internal/Scripts/pickup
   m_LastFoldersGridSize: 45
   m_LastProjectPath: E:\Project\Online\PC\shooting Game
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 223}
-    m_SelectedIDs: 5c810000
-    m_LastClickedID: 33116
-    m_ExpandedIDs: 00000000288100002a8100002c8100002e8100003081000000ca9a3b
+    scrollPos: {x: 0, y: 343}
+    m_SelectedIDs: 98830000
+    m_LastClickedID: 33688
+    m_ExpandedIDs: 00000000288100002a8100002c8100002e810000308100005a8100006081000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -489,7 +489,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000288100002a8100002c8100002e810000308100003281000034810000
+    m_ExpandedIDs: 00000000288100002a8100002c8100002e81000030810000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -516,7 +516,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000d27c0000d47c0000d67c0000d87c0000da7c0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -619,9 +619,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
+      m_SelectedIDs: 6c480000
       m_LastClickedID: 0
-      m_ExpandedIDs: fa51ffff9c52ffff8255ffff8c55ffff9a6fffff3c70ffff2673ffff3473ffff1674ffffa475ffff927dffff347effff1e81ffff2c81ffff0a82ffff1883ffff489fffffea9fffffcaa2ffffd8a2ffffd0a3ffffdec6ffff8ef1ffffaef4ffff2ef5ffff14f8ffff20f8ffff02fbffff
+      m_ExpandedIDs: d409ffff760affff8e0affff980affff680cffff0a0dfffff00ffffffa0fffffb227ffff5428ffff342bffff3e2bffff1646ffffb846ffff9a49ffffa449ffff2a5cffffcc5cffffb25fffffbc5fffff7877ffff1a78fffffe7affff087bffff4694ffffe894ffffce97ffffd897ffffdab1ffffb2d7ffff02dbffffa4dbffff7cdeffff86deffff0ae0ffff3cf7ffff02fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -937,9 +937,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 962.41974, y: 494.31372, z: -4.4060006}
+    m_Target: {x: 160.35777, y: 43.547333, z: 0.4648798}
     speed: 2
-    m_Value: {x: 962.41974, y: 494.31372, z: -4.4060006}
+    m_Value: {x: 160.35777, y: 43.547333, z: 0.4648798}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -990,9 +990,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 699.54193
+    m_Target: 206.5222
     speed: 2
-    m_Value: 699.54193
+    m_Value: 206.5222
   m_Ortho:
     m_Target: 1
     speed: 2

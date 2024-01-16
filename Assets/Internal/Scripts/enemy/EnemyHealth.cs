@@ -20,6 +20,10 @@ public class EnemyHealth : Health
             HealthInit();
         }
     }
+    public override void ObjectDie(ulong owner)
+    {
+        ObjectDie();
+    }
     public override void ObjectDie()
     {
         if (enemy != null)

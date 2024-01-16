@@ -21,6 +21,7 @@ public class PlayerMovement : NetworkBehaviour
     float plusSpeed = 0f;
 
     private PlayerHealth playerHealth;
+    private PlayerLight playerLight;
 
     bool isDie = false;
 
@@ -33,6 +34,7 @@ public class PlayerMovement : NetworkBehaviour
     public override void OnNetworkSpawn()
     {
         playerHealth = GetComponent<PlayerHealth>();
+        playerLight = GetComponent<PlayerLight>();
         rb = GetComponent<Rigidbody2D>();
         foreach (Transform child in transform)
         {
@@ -261,5 +263,9 @@ public class PlayerMovement : NetworkBehaviour
     public CinemachineVirtualCamera GetMainCamera()
     {
         return virtualCamera;
+    }
+    public void ChangeLightStatus(bool v)
+    {
+        playerLight.SetUpDieLight(v);
     }
 }

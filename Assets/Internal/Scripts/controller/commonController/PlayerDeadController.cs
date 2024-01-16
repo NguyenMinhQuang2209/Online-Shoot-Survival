@@ -1,5 +1,4 @@
 ﻿using Cinemachine;
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.Netcode;
@@ -58,6 +57,7 @@ public class PlayerDeadController : NetworkBehaviour
             CinemachineVirtualCamera mainCamera = currentPlayerMovement.GetMainCamera();
             mainCamera.Priority = 0;
             mainCamera.enabled = false;
+            currentPlayerMovement.ChangeLightStatus(false);
         }
         if (nextObject.TryGetComponent<PlayerMovement>(out var playerMovement))
         {
@@ -65,13 +65,14 @@ public class PlayerDeadController : NetworkBehaviour
             CinemachineVirtualCamera mainCamera = playerMovement.GetMainCamera();
             mainCamera.Priority = 1;
             mainCamera.enabled = true;
+            currentPlayerMovement.ChangeLightStatus(true);
         }
     }
     public void OutMatch()
     {
         if (!IsServer)
         {
-            NetworkManager.Singleton.DisconnectClient(OwnerClientId);
+            NetworkManager.Singleton.Shutdown();
             if (SceneController.instance != null)
             {
                 SceneController.instance.ChangeScene(SceneController.SceneName.Lobby, true);
