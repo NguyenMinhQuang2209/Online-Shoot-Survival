@@ -100,6 +100,20 @@ public class Enemy : NetworkBehaviour
             }
         }
     }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (IsServer)
+        {
+            if (currentTakeDamageWaitTime >= takeDamageWaitTime)
+            {
+                currentTakeDamageWaitTime = 0f;
+                if (collision.gameObject.TryGetComponent<PlayerHealth>(out var health))
+                {
+                    health.TakeDamage(damage);
+                }
+            }
+        }
+    }
     public void EnemyDie()
     {
         if (agent != null)

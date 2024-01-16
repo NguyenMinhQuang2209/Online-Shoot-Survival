@@ -73345,8 +73345,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eb4658cc0042264bbabe85d360ff80f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnXAxis: {x: -36, y: 36}
-  spawnYAxis: {x: -36, y: 36}
+  spawnXAxis: {x: -5, y: 5}
+  spawnYAxis: {x: -5, y: 5}
   waitSpawnTime: 3
   startGameTxt: {fileID: 198749953}
 --- !u!114 &1603452713

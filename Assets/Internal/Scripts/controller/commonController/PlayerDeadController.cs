@@ -63,8 +63,8 @@ public class PlayerDeadController : NetworkBehaviour
         {
             playerNameTxt.text = playerMovement.GetUserName();
             CinemachineVirtualCamera mainCamera = playerMovement.GetMainCamera();
-            mainCamera.Priority = 0;
-            mainCamera.enabled = false;
+            mainCamera.Priority = 1;
+            mainCamera.enabled = true;
         }
     }
     public void OutMatch()

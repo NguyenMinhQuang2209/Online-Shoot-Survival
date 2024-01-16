@@ -10,9 +10,22 @@ public class PlayerLight : NetworkBehaviour
     [SerializeField] private Transform lightSpawn;
 
     LightCustom currentLight = null;
+    private PlayerMovement playerMovement;
     public override void OnNetworkSpawn()
     {
         light2d.gameObject.SetActive(IsOwner);
+        playerMovement = GetComponent<PlayerMovement>();
+    }
+    private void Update()
+    {
+        if (IsOwner)
+        {
+            if (playerMovement.PlayerDie())
+            {
+                light2d.pointLightInnerRadius = 5f;
+                light2d.pointLightOuterRadius = 5f;
+            }
+        }
     }
     public void EquipmentLight(LightCustom customLight)
     {
