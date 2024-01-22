@@ -1,8 +1,10 @@
 ﻿using Cinemachine;
+using System;
 using System.Collections.Generic;
 using TMPro;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerDeadController : NetworkBehaviour
@@ -70,37 +72,55 @@ public class PlayerDeadController : NetworkBehaviour
     }
     public void OutMatch()
     {
-        if (!IsServer)
+        try
         {
-            NetworkManager.Singleton.Shutdown();
-            if (SceneController.instance != null)
+            if (!IsServer)
             {
-                SceneController.instance.ChangeScene(SceneController.SceneName.Lobby, true);
-            }
-        }
-        else
-        {
-            bool canEnd = true;
-            for (int i = 0; i < playerList.Count; i++)
-            {
-                if (playerList[i].TryGetComponent<PlayerMovement>(out var playerMovement))
-                {
-                    if (!playerMovement.PlayerDie())
-                    {
-                        canEnd = false;
-                        break;
-                    }
-                }
-            }
-            if (!canEnd)
-            {
-                ShowDeadTxt showDeadTxt = PreferenceController.instance.showDeadTxtController;
-                showDeadTxt.ShowLog("Người chơi chưa chết hết!");
+                NetworkManager.Singleton.Shutdown();
+                ClearGameObjects();
+                SceneManager.LoadScene("Lobby", LoadSceneMode.Single);
             }
             else
             {
-                SceneController.instance.ChangeSceneSync(SceneController.SceneName.SelectScene, true);
+                bool canEnd = true;
+                for (int i = 0; i < playerList.Count; i++)
+                {
+                    if (playerList[i].TryGetComponent<PlayerMovement>(out var playerMovement))
+                    {
+                        if (!playerMovement.PlayerDie())
+                        {
+                            canEnd = false;
+                            break;
+                        }
+                    }
+                }
+                if (!canEnd)
+                {
+                    ShowDeadTxt showDeadTxt = PreferenceController.instance.showDeadTxtController;
+                    showDeadTxt.ShowLog("Người chơi chưa chết hết!");
+                }
+                else
+                {
+                    NetworkManager.Singleton.Shutdown();
+                    ClearGameObjects();
+                    SceneManager.LoadScene("Lobby", LoadSceneMode.Single);
+                }
             }
+        }
+        catch (Exception e)
+        {
+            LogController.instance.Log(e.Message);
+            NetworkManager.Singleton.Shutdown();
+            ClearGameObjects();
+            SceneManager.LoadScene("Lobby", LoadSceneMode.Single);
+        }
+    }
+    private void ClearGameObjects()
+    {
+        GameObject[] removes = GameObject.FindGameObjectsWithTag("Removes");
+        foreach (var remove in removes)
+        {
+            Destroy(remove);
         }
     }
 }

@@ -18,10 +18,6 @@ public class RelayController : MonoBehaviour
         }
         instance = this;
     }
-    private void Start()
-    {
-        DontDestroyOnLoad(gameObject);
-    }
     public async Task<string> CreateLobby(int slot)
     {
         try

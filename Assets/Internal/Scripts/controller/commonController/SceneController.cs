@@ -37,7 +37,10 @@ public class SceneController : MonoBehaviour
         if (sceneName != currentScene)
         {
             currentScene = sceneName;
-            ChangeSceneEvent?.Invoke(this, null);
+            if (currentScene != "Lobby")
+            {
+                ChangeSceneEvent?.Invoke(this, null);
+            }
         }
     }
     public void ChangeScene(SceneName name, bool isSingle)

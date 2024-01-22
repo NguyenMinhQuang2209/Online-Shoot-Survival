@@ -213,7 +213,7 @@ GameObject:
   - component: {fileID: 25305843}
   m_Layer: 0
   m_Name: GameController
-  m_TagString: GameController
+  m_TagString: Removes
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -230,8 +230,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6860304c926505347bf858b5f332bd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameMode:
-    m_InternalValue: 0
   playerName: 
 --- !u!4 &25305844
 Transform:
@@ -4054,7 +4052,7 @@ GameObject:
   - component: {fileID: 736112000}
   m_Layer: 0
   m_Name: networkManager
-  m_TagString: Untagged
+  m_TagString: Removes
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9186,7 +9184,7 @@ GameObject:
   - component: {fileID: 1746246782}
   m_Layer: 0
   m_Name: SceneController
-  m_TagString: Untagged
+  m_TagString: Removes
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -84,7 +84,7 @@ public class PlayerMovement : NetworkBehaviour
 
     private void HandleChangeSceneEvent(object sender, EventArgs e)
     {
-        if (CameraCompoundController.instance != null)
+        if (CameraCompoundController.instance != null && virtualCamera != null)
         {
             if (virtualCamera.TryGetComponent<CinemachineConfiner2D>(out var compound))
             {

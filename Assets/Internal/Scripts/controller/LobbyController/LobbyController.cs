@@ -188,6 +188,8 @@ public class LobbyController : MonoBehaviour
         OnJoinedSystem += HandleReloadLobbyList;
         OnJoinLobbyEvent += HandleJoinLobbyEvent;
         OnLeftLobbyEvent += HandleLeftLobbyEvent;
+
+        CheckSigninStatus();
     }
     private void Update()
     {
@@ -230,7 +232,31 @@ public class LobbyController : MonoBehaviour
         }
     }
 
+    public void CheckSigninStatus()
+    {
+        try
+        {
+            if (AuthenticationService.Instance.IsSignedIn)
+            {
+                string username = AuthenticationService.Instance.Profile;
+                userNameContainer.SetActive(false);
 
+                playerNameTxt.text = username;
+                GetLobbyList("");
+                lobbyListContainer.SetActive(true);
+
+                GameObject gameController = GameObject.FindGameObjectWithTag("GameController");
+                if (gameController != null && gameController.TryGetComponent<GameController>(out var gameC))
+                {
+                    gameC.playerName = username;
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            LogController.instance.Log(e.Message);
+        }
+    }
     private void HandleLeftLobbyEvent(object sender, EventArgs e)
     {
 

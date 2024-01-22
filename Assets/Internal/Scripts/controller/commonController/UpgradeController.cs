@@ -37,7 +37,6 @@ public class UpgradeController : MonoBehaviour
             return;
         }
         instance = this;
-        DontDestroyOnLoad(gameObject);
     }
     public void ChangePlusItemValue(
         int plusHealth,
